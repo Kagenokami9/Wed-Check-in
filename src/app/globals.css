@@ -1,0 +1,207 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-sans-family);
+  --font-display: var(--font-display-family);
+
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--surface-card);
+  --color-elevated: var(--surface-elevated);
+  --color-ink: var(--text-primary);
+  --color-ink-secondary: var(--text-secondary);
+  --color-ink-muted: var(--text-muted);
+  --color-accent: var(--accent-blue);
+  --color-accent-strong: var(--accent-blue-strong);
+  --color-accent-sky: var(--accent-sky);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans-family);
+    min-height: 100dvh;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--accent-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* Luminous atmospheric backdrop so Liquid Glass panels refract real depth */
+.canvas-backdrop {
+  position: relative;
+  background-color: var(--bg-canvas);
+  background-image:
+    radial-gradient(680px circle at 10% 0%, var(--orb-secondary), transparent 60%),
+    radial-gradient(580px circle at 90% 10%, var(--orb-primary), transparent 58%),
+    radial-gradient(620px circle at 52% 96%, var(--orb-secondary), transparent 64%);
+  background-attachment: fixed;
+}
+
+/* Ultra-fine procedural grain to eliminate gradient banding & elevate glass craft */
+.canvas-backdrop::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Optical Liquid Glass Room Card (photo/4ESP_xQO.jpeg) */
+.liquid-glass-room {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-glass-room);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  transition:
+    box-shadow var(--duration-normal) var(--ease-standard),
+    border-color var(--duration-normal) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+/* Diagonal specular refraction highlight across top-left glass face */
+.liquid-glass-room::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    132deg,
+    rgba(255, 255, 255, 0.34) 0%,
+    rgba(255, 255, 255, 0.06) 36%,
+    transparent 62%
+  );
+}
+
+.dark .liquid-glass-room::before {
+  background: linear-gradient(
+    132deg,
+    rgba(192, 209, 242, 0.14) 0%,
+    rgba(192, 209, 242, 0.03) 34%,
+    transparent 60%
+  );
+}
+
+.liquid-glass-room:hover,
+.liquid-glass-room:focus-visible {
+  box-shadow: var(--glass-shadow-hover);
+  border-color: var(--border-glass-outer);
+}
+
+.liquid-glass-room:active,
+.liquid-glass-room[data-pressed="true"] {
+  box-shadow: var(--glass-shadow-hover);
+  transform: scale(0.985);
+}
+
+/* Quiet Frosted Surface Panel (Cards, Filter Bars, Controls) */
+.liquid-glass-panel {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+
+/* Editorial Frosted Hero Container (photo/utC2UIoZ.jpeg) */
+.liquid-glass-hero {
+  position: relative;
+  background: var(--surface-glass-hero);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+}
+
+/* Signature Blue-Framed Nickname Stamp |บีม| */
+.nickname-pill {
+  background-color: var(--badge-nickname-bg);
+  border: 1px solid var(--badge-nickname-border);
+  color: var(--badge-nickname-text);
+}
+
+/* Tactile Frosted Glass Keypad Button (Login Numpad) */
+.glass-key {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  box-shadow:
+    0 2px 6px rgba(16, 19, 24, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.dark .glass-key {
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(192, 209, 242, 0.14);
+}
+
+.glass-key:hover {
+  border-color: var(--border-strong);
+  background: var(--accent-blue-soft);
+}
+
+.glass-key:active {
+  transform: scale(0.96);
+}
+
+/* PIN error shake animation */
+@keyframes shake-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-shake {
+  animation: shake-x 0.34s var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,314 @@
+/* ============================================================================
+ * BLUE CHECK-IN — Three-Layer Design Tokens (Primitive -> Semantic -> Component)
+ * Palette grounded in photo/0NNHDpDi.jpeg (#C0D1F2 / #101318),
+ * photo/utC2UIoZ.jpeg (ambient frosted sky), photo/4ESP_xQO.jpeg (optical liquid glass),
+ * photo/gRGrr8M9.jpeg & photo/y-Vi1i7X.jpeg (semantic status & quick action).
+ * Refined with unslop discipline: monochrome-blue editorial contrast, zero default
+ * Tailwind electric blue, toned semantic hues, 4px grid, and real optical depth.
+ * ============================================================================ */
+
+:root {
+  /* --------------------------------------------------------------------------
+   * Layer 1: Primitive Tokens (Raw Brand & Palette Values)
+   * -------------------------------------------------------------------------- */
+  --primitive-sky-50: #edf3fb;
+  --primitive-sky-100: #e1ebf9;
+  --primitive-sky-200: #d5e3f8;
+  --primitive-sky-300: #c0d1f2;
+  --primitive-sky-400: #93b0df;
+  --primitive-steel-500: #597ea3;
+  --primitive-steel-600: #45688c;
+  --primitive-steel-700: #335476;
+  --primitive-navy-800: #1e344d;
+  --primitive-navy-900: #152538;
+
+  --primitive-obsidian-950: #101318;
+  --primitive-obsidian-900: #151922;
+  --primitive-obsidian-850: #1a202c;
+  --primitive-obsidian-800: #202838;
+  --primitive-obsidian-700: #2b354a;
+
+  --primitive-white: #ffffff;
+  --primitive-slate-100: #eef2f7;
+  --primitive-slate-300: #c6d2e1;
+  --primitive-slate-500: #56687e;
+  --primitive-slate-600: #3c4d63;
+  --primitive-slate-700: #293647;
+
+  /* Toned Semantic Status Primitives */
+  --primitive-green-100: #dcf5e7;
+  --primitive-green-200: #8ae0b2;
+  --primitive-green-400: #46be82;
+  --primitive-green-500: #1c965c;
+  --primitive-green-600: #167c4c;
+  --primitive-green-700: #13643e;
+
+  --primitive-red-100: #fde4e4;
+  --primitive-red-300: #f4a4a8;
+  --primitive-red-400: #e56b70;
+  --primitive-red-500: #cf3a42;
+  --primitive-red-700: #a5242c;
+
+  --primitive-amber-100: #fcf0d5;
+  --primitive-amber-200: #f6d58e;
+  --primitive-amber-400: #e5a93c;
+  --primitive-amber-600: #c07b16;
+  --primitive-amber-700: #955d0c;
+
+  --primitive-purple-100: #f0e6fb;
+  --primitive-purple-200: #d9c0f7;
+  --primitive-purple-400: #ab82e3;
+  --primitive-purple-600: #7c4bc4;
+  --primitive-purple-700: #6135a3;
+
+  /* Subtle Grade Tints (all inside the Blue family for visual grouping) */
+  --grade-1-accent: #4c7bb0;
+  --grade-2-accent: #3d6b99;
+  --grade-3-accent: #355880;
+  --grade-4-accent: #44568a;
+
+  /* Typography & Motion Primitives */
+  --font-display-family: "Jost", system-ui, -apple-system, sans-serif;
+  --font-sans-family: "Anuphan", system-ui, -apple-system, sans-serif;
+
+  --radius-xs: 0.5rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 1.75rem;
+  --radius-pill: 9999px;
+
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 140ms;
+  --duration-normal: 220ms;
+  --duration-slow: 320ms;
+
+  /* --------------------------------------------------------------------------
+   * Layer 2: Semantic Tokens — Light Mode (Editorial Ice & Obsidian)
+   * -------------------------------------------------------------------------- */
+  --bg-canvas: var(--primitive-sky-50);
+  --bg-subtle: rgba(16, 19, 24, 0.04);
+  --surface-card: rgba(255, 255, 255, 0.72);
+  --surface-elevated: rgba(255, 255, 255, 0.9);
+  --surface-glass-hero: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.84) 0%,
+    rgba(235, 243, 253, 0.72) 52%,
+    rgba(192, 209, 242, 0.52) 100%
+  );
+  /* Optical Liquid Glass matching photo/4ESP_xQO.jpeg */
+  --surface-glass-room: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(232, 241, 252, 0.62) 48%,
+    rgba(176, 199, 232, 0.46) 100%
+  );
+  --surface-input: rgba(255, 255, 255, 0.84);
+
+  --border-subtle: rgba(16, 19, 24, 0.08);
+  --border-strong: rgba(16, 19, 24, 0.16);
+  --border-glass: rgba(255, 255, 255, 0.92);
+  --border-glass-outer: rgba(69, 104, 140, 0.28);
+
+  --text-primary: var(--primitive-obsidian-950);
+  --text-secondary: var(--primitive-slate-600);
+  --text-muted: var(--primitive-slate-500);
+  --text-on-accent: #f4f7fc;
+
+  /* Brand Accent: Obsidian Primary CTA + Editorial Steel Ink (kills #2563EB) */
+  --accent-blue: var(--primitive-steel-600);
+  --accent-blue-strong: var(--primitive-obsidian-950);
+  --accent-ink: var(--primitive-steel-700);
+  --accent-blue-soft: rgba(192, 209, 242, 0.42);
+  --accent-sky: var(--primitive-sky-300);
+  --focus-ring: rgba(51, 84, 118, 0.45);
+
+  --orb-primary: rgba(89, 126, 163, 0.42);
+  --orb-secondary: rgba(192, 209, 242, 0.78);
+  --orb-solid: #4d759b;
+  --sparkle-color: var(--primitive-steel-700);
+
+  --glass-shadow:
+    0 12px 30px -14px rgba(30, 52, 77, 0.24),
+    0 2px 6px rgba(16, 19, 24, 0.05),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.96),
+    inset 0 -14px 26px rgba(69, 104, 140, 0.16);
+  --glass-shadow-hover:
+    0 22px 44px -12px rgba(30, 52, 77, 0.34),
+    0 6px 16px -6px rgba(16, 19, 24, 0.12),
+    inset 0 1.5px 0 rgba(255, 255, 255, 1),
+    inset 0 -14px 28px rgba(69, 104, 140, 0.22);
+  --card-shadow:
+    0 6px 20px -10px rgba(30, 52, 77, 0.14),
+    0 1px 2px rgba(16, 19, 24, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+  /* Nickname Badge Tokens */
+  --badge-nickname-bg: #dbe7fb;
+  --badge-nickname-border: #8daee0;
+  --badge-nickname-text: var(--primitive-navy-900);
+
+  /* Attendance Status Semantic Tokens (Light) */
+  --status-present-bg: var(--primitive-green-100);
+  --status-present-border: var(--primitive-green-500);
+  --status-present-text: var(--primitive-green-700);
+
+  --status-absent-bg: var(--primitive-red-100);
+  --status-absent-border: var(--primitive-red-500);
+  --status-absent-text: var(--primitive-red-700);
+
+  --status-late-bg: var(--primitive-amber-100);
+  --status-late-border: var(--primitive-amber-600);
+  --status-late-text: var(--primitive-amber-700);
+
+  --status-other-bg: var(--primitive-purple-100);
+  --status-other-border: var(--primitive-purple-600);
+  --status-other-text: var(--primitive-purple-700);
+
+  --status-unmarked-bg: var(--primitive-slate-100);
+  --status-unmarked-border: var(--primitive-slate-300);
+  --status-unmarked-text: #47586d;
+
+  /* Chart Series Tokens (Light — harmonious saturation) */
+  --chart-present: #1c965c;
+  --chart-present-fade: #52c088;
+  --chart-late: #cc8418;
+  --chart-late-fade: #e7ae4c;
+  --chart-absent: #cf3a42;
+  --chart-absent-fade: #e56d74;
+  --chart-other: #7c4bc4;
+  --chart-other-fade: #a882e0;
+
+  /* --------------------------------------------------------------------------
+   * Layer 3: Component Tokens (Light)
+   * -------------------------------------------------------------------------- */
+  --sidebar-bg: rgba(255, 255, 255, 0.86);
+  --sidebar-border: rgba(16, 19, 24, 0.08);
+  --sticky-header-bg: rgba(237, 243, 251, 0.82);
+  --sticky-save-bg: rgba(255, 255, 255, 0.88);
+  --modal-surface: rgba(255, 255, 255, 0.96);
+  --modal-scrim: rgba(16, 19, 24, 0.42);
+  --room-badge-circle-bg: rgba(255, 255, 255, 0.98);
+  --room-badge-circle-shadow: 0 8px 18px -4px rgba(16, 19, 24, 0.14);
+  --cta-present-bg: rgba(220, 245, 231, 0.85);
+  --cta-present-hover: rgba(197, 238, 215, 0.95);
+  --cta-present-border: rgba(28, 150, 92, 0.42);
+  --cta-present-text: var(--primitive-green-700);
+}
+
+.dark {
+  /* --------------------------------------------------------------------------
+   * Layer 2: Semantic Tokens — Dark Mode (#101318 Obsidian + #C0D1F2 Ice)
+   * -------------------------------------------------------------------------- */
+  --bg-canvas: var(--primitive-obsidian-950);
+  --bg-subtle: rgba(192, 209, 242, 0.06);
+  --surface-card: rgba(22, 27, 37, 0.72);
+  --surface-elevated: rgba(28, 35, 48, 0.88);
+  --surface-glass-hero: linear-gradient(
+    135deg,
+    rgba(30, 39, 56, 0.78) 0%,
+    rgba(20, 25, 35, 0.72) 55%,
+    rgba(192, 209, 242, 0.14) 100%
+  );
+  /* Optical Dark Liquid Glass with luminous ice edge refraction */
+  --surface-glass-room: linear-gradient(
+    145deg,
+    rgba(36, 46, 66, 0.72) 0%,
+    rgba(22, 28, 41, 0.66) 52%,
+    rgba(192, 209, 242, 0.16) 100%
+  );
+  --surface-input: rgba(20, 25, 35, 0.86);
+
+  --border-subtle: rgba(234, 240, 251, 0.09);
+  --border-strong: rgba(192, 209, 242, 0.22);
+  --border-glass: rgba(192, 209, 242, 0.24);
+  --border-glass-outer: rgba(192, 209, 242, 0.36);
+
+  --text-primary: #edf2fb;
+  --text-secondary: #a8bad8;
+  --text-muted: #7f93b5;
+  --text-on-accent: var(--primitive-obsidian-950);
+
+  /* Brand Accent: Ice Periwinkle #C0D1F2 Primary CTA with Obsidian Ink */
+  --accent-blue: var(--primitive-sky-300);
+  --accent-blue-strong: var(--primitive-sky-300);
+  --accent-ink: var(--primitive-sky-300);
+  --accent-blue-soft: rgba(192, 209, 242, 0.14);
+  --accent-sky: var(--primitive-sky-300);
+  --focus-ring: rgba(192, 209, 242, 0.48);
+
+  --grade-1-accent: #c0d1f2;
+  --grade-2-accent: #9bbde8;
+  --grade-3-accent: #84a8d9;
+  --grade-4-accent: #adbce6;
+
+  --orb-primary: rgba(192, 209, 242, 0.22);
+  --orb-secondary: rgba(89, 126, 163, 0.32);
+  --orb-solid: #6a8eb5;
+  --sparkle-color: var(--primitive-sky-300);
+
+  --glass-shadow:
+    0 14px 32px -14px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(192, 209, 242, 0.28),
+    inset 0 -14px 26px rgba(192, 209, 242, 0.08);
+  --glass-shadow-hover:
+    0 22px 44px -12px rgba(192, 209, 242, 0.2),
+    0 10px 24px -8px rgba(0, 0, 0, 0.75),
+    inset 0 1.5px 0 rgba(192, 209, 242, 0.44),
+    inset 0 -14px 28px rgba(192, 209, 242, 0.12);
+  --card-shadow:
+    0 8px 24px -12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(234, 240, 251, 0.08);
+
+  /* Nickname Badge Tokens (Dark) */
+  --badge-nickname-bg: rgba(192, 209, 242, 0.15);
+  --badge-nickname-border: rgba(192, 209, 242, 0.4);
+  --badge-nickname-text: var(--primitive-sky-300);
+
+  /* Attendance Status Semantic Tokens (Dark — calm, zero halation) */
+  --status-present-bg: rgba(70, 190, 130, 0.15);
+  --status-present-border: var(--primitive-green-400);
+  --status-present-text: var(--primitive-green-200);
+
+  --status-absent-bg: rgba(229, 107, 112, 0.16);
+  --status-absent-border: var(--primitive-red-400);
+  --status-absent-text: var(--primitive-red-300);
+
+  --status-late-bg: rgba(229, 169, 60, 0.16);
+  --status-late-border: var(--primitive-amber-400);
+  --status-late-text: var(--primitive-amber-200);
+
+  --status-other-bg: rgba(171, 130, 227, 0.17);
+  --status-other-border: var(--primitive-purple-400);
+  --status-other-text: var(--primitive-purple-200);
+
+  --status-unmarked-bg: rgba(192, 209, 242, 0.08);
+  --status-unmarked-border: rgba(192, 209, 242, 0.22);
+  --status-unmarked-text: #b7c5dd;
+
+  /* Chart Series Tokens (Dark — desaturated to prevent chromatic vibration on obsidian) */
+  --chart-present: #46be82;
+  --chart-present-fade: #2b8a5b;
+  --chart-late: #dfa745;
+  --chart-late-fade: #a67626;
+  --chart-absent: #e06369;
+  --chart-absent-fade: #a83c43;
+  --chart-other: #a57ede;
+  --chart-other-fade: #714ca8;
+
+  /* --------------------------------------------------------------------------
+   * Layer 3: Component Tokens (Dark)
+   * -------------------------------------------------------------------------- */
+  --sidebar-bg: rgba(18, 22, 31, 0.9);
+  --sidebar-border: rgba(234, 240, 251, 0.08);
+  --sticky-header-bg: rgba(16, 19, 24, 0.84);
+  --sticky-save-bg: rgba(20, 25, 35, 0.92);
+  --modal-surface: rgba(22, 28, 40, 0.98);
+  --modal-scrim: rgba(4, 7, 12, 0.72);
+  --room-badge-circle-bg: rgba(28, 36, 52, 0.96);
+  --room-badge-circle-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  --cta-present-bg: rgba(70, 190, 130, 0.16);
+  --cta-present-hover: rgba(70, 190, 130, 0.26);
+  --cta-present-border: rgba(70, 190, 130, 0.42);
+  --cta-present-text: var(--primitive-green-200);
+}

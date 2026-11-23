@@ -1,4 +1,27 @@
+# Sensitive Student Data & Local Media (NEVER commit)
 roster-images/
-student-list-2569.md
+student-list-*.md
+src/data/roster.json
+blue-checkin-backup-*.json
+*.backup.json
+
+# Environment Secrets (NEVER commit; only .env.example is allowed)
 .env
+.env.*
+!.env.example
+
+# Local Design Reference & Draft Docs
+photo/
+implementation_plan.md
+outline.md
+
+# Dependencies, Tooling & Build Outputs
 node_modules/
+.agents/
+.next/
+.tmp-test/
+.vercel/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
